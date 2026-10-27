@@ -140,6 +140,17 @@
   .intro { margin: 0 0 30px; max-width: 62ch; color: var(--muted); }
   .intro em { font-style: normal; color: var(--blue); font-weight: 600; }
 
+  .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; }
+  .tab {
+    min-height: 44px; padding: 0 22px;
+    border: 2px solid var(--pale); border-radius: 10px;
+    background: #FFFFFF; color: var(--blue);
+    font-family: var(--display); font-weight: 700; font-size: 19px; letter-spacing: .05em;
+    cursor: pointer;
+  }
+  @media (max-width: 760px) { .tabs { flex-wrap: nowrap; gap: 8px; } .tab { flex: 1 1 0; padding: 0 8px; font-size: 17px; } }
+  .tab:hover:not([aria-selected="true"]) { background: var(--ice); }
+  .tab[aria-selected="true"] { background: linear-gradient(180deg, #2A6FD6, var(--navy)); color: #FFFFFF; border-color: #0A1B45; box-shadow: 0 3px 0 var(--cyan); }
   .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 30px; }
   .span2 { grid-column: 1 / -1; }
   label, .label {
@@ -300,6 +311,12 @@
     </div>
 
     <div id="viewForm">
+      <div class="tabs" role="tablist" aria-label="What would you like to do?">
+        <button type="button" class="tab" role="tab" id="tabReg" aria-selected="true" aria-controls="panelReg">Register</button>
+        <button type="button" class="tab" role="tab" id="tabFind" aria-selected="false" aria-controls="panelFind" tabindex="-1">Get my card back</button>
+      </div>
+
+      <div id="panelReg" role="tabpanel" aria-labelledby="tabReg">
       <h1>Member registration</h1>
       <p class="intro">Join the crew of the U.S.S. A.L.E.X.I.S., short for <em>Adaptive Learning, Education, and eXperimental Intelligence for Society</em>. Your details are saved to the member roster, and your member card is made on this page.</p>
 
@@ -374,6 +391,54 @@
           </div>
         </div>
       </form>
+      </div>
+
+      <div id="panelFind" role="tabpanel" aria-labelledby="tabFind" hidden>
+        <h1>Get my card back</h1>
+        <p class="intro">Already registered? Enter the same name, university and PIN you used before and your card is drawn again. Nothing in the roster is changed.</p>
+
+        <div id="alertFind" class="alert" role="alert" hidden></div>
+
+        <form id="findForm" novalidate autocomplete="off">
+          <div class="grid">
+            <div>
+              <label for="findName">Full name</label>
+              <input type="text" id="findName" name="findName" maxlength="60" autocomplete="name" placeholder="e.g. Alexis Tan" aria-describedby="h_findName e_findName">
+              <p class="hint" id="h_findName">Spell it the way you did when you registered.</p>
+              <p class="err" id="e_findName" hidden></p>
+            </div>
+            <div>
+              <label for="findUni">University</label>
+              <input type="text" id="findUni" name="findUni" maxlength="80" placeholder="e.g. YunTech" aria-describedby="e_findUni">
+              <p class="err" id="e_findUni" hidden></p>
+            </div>
+            <div>
+              <label for="findPin">PIN</label>
+              <input type="password" id="findPin" name="findPin" class="pin" inputmode="numeric" maxlength="4" autocomplete="off" aria-describedby="h_findPin e_findPin">
+              <p class="hint" id="h_findPin">The 4 digits you chose when you registered. Forgot it? Ask Alexis.</p>
+              <p class="err" id="e_findPin" hidden></p>
+            </div>
+            <div class="span2">
+              <span class="label">Photo (optional)</span>
+              <div class="photo-row">
+                <input type="file" id="findPhoto" class="sr" accept="image/*">
+                <label for="findPhoto" class="pill" style="margin:0">Choose photo</label>
+                <img id="findThumb" class="thumb" alt="" hidden>
+                <button type="button" id="findPhotoClear" class="pill pill-ghost" hidden>Remove photo</button>
+              </div>
+              <p class="hint">Photos are never saved, so add yours again if you want it on the card. It stays on this device.</p>
+              <p class="err" id="e_findPhoto" hidden></p>
+            </div>
+            <div class="trap" aria-hidden="true">
+              <label for="findWebsite">Leave this empty</label>
+              <input type="text" id="findWebsite" name="findWebsite" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="span2">
+              <button type="submit" class="go" id="btnFind">Find my card</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
     <section id="viewResult" class="result" hidden aria-live="polite">
@@ -470,12 +535,16 @@
     choose: 'Choose one',
     t_pick: 'Choose your relationship and standing to see your titles.', t_role: 'Your role:', t_level: 'Your academic level:',
     b_submit: 'Register and create my card', b_submitting: 'Registering…',
+    b_find: 'Find my card', b_finding: 'Searching…', b_another: 'Register another member', b_back: 'Back to the form',
     s_checking: 'Checking roster', s_live: 'Roster online', s_offline: 'Roster offline', s_demo: 'Demo mode',
     s_demo_sub: 'Nothing is saved', s_offline_sub: 'Try again later',
     e_required: 'Fill in this field.', e_pin: 'Enter exactly 4 digits.', e_name_long: 'Use 60 characters or fewer.',
     e_photo_bad: 'This file could not be read as an image. Choose a JPG or PNG.', e_photo_big: 'This photo is over 15 MB. Choose a smaller one.',
+    err_old_backend: 'The roster has not been updated for this feature yet. Please tell the site owner to deploy the latest Code.gs.',
     err_invalid_input: 'The roster rejected one of the answers. Check the form and try again.',
-    err_name_taken: 'This name is already registered at this university. Enter the PIN you used before to get your card again.',
+    err_name_taken: 'This name is already registered at this university. If that is you, open the "Get my card back" tab and enter your PIN.',
+    err_not_found: 'No member found with that name, university and PIN. Check the spelling (the same as when you registered) and the PIN, then try again.',
+    err_locked: 'Too many wrong tries for this name. Please wait 15 minutes and try again.',
     err_busy: 'The roster is busy. Try again in a few seconds.',
     err_network: 'Could not reach the roster. Check your connection and try again.',
     err_timeout: 'The roster took too long to answer. Try again; registering twice is safe and will not create a duplicate.',
@@ -584,50 +653,68 @@
 
   /* Demo only: a rough stand-in for the server so the page can be previewed.
      The real SEC-CODE rules live in apps-script/Code.gs. */
+  const demoStore = [];
   function demoApi(p) {
     return new Promise(resolve => setTimeout(() => {
+      const norm = x => String(x || '').trim().replace(/\s+/g, ' ').toLowerCase();
+      const k = norm(p.fullName) + '|' + norm(p.university);
+      const hit = demoStore.find(x => x.k === k);
+      if (p.action === 'lookup') {
+        return resolve(hit && hit.pin === p.pin ? { ok: true, returning: true, member: hit.member } : { ok: false, error: 'not_found' });
+      }
+      if (hit) return resolve(hit.pin === p.pin ? { ok: true, returning: true, member: hit.member } : { ok: false, error: 'name_taken' });
       const d = (p.department || '').toUpperCase();
       const dept = /INTERNATIONAL/.test(d) ? 'BIM' : /MANAGEMENT|BUSINESS/.test(d) ? 'COM'
         : /ENGINEERING|COMPUTER/.test(d) ? 'ENG' : /DESIGN|LANGUAGE|\bARTS?\b/.test(d) ? 'ART' : 'GEN';
       const name = p.fullName.trim(), words = name.split(/\s+/);
       const ini = /[㐀-鿿]/.test(name[0]) ? name[0] : words[words.length - 1][0].toUpperCase();
       const aff = /YUNTECH|YUNLIN/i.test(p.university) ? 'DELTA' : 'GAMMA';
-      resolve({ ok: true, returning: false, member: {
-        memberId: 7, secCode: `007-${dept}-${ini}-${aff}`, fullName: name,
+      const num = 7 + demoStore.length;
+      const member = {
+        memberId: num, secCode: `${pad(num, 3)}-${dept}-${ini}-${aff}`, fullName: name,
         role: (find(RELATIONSHIPS, p.relationship) || RELATIONSHIPS[2]).title,
         level: (find(STANDINGS, p.standing) || STANDINGS[0]).title,
         relationship: p.relationship, standing: p.standing,
         department: p.department.trim(), university: p.university.trim(), country: p.country.trim(),
         motto: p.motto, since: new Date().getFullYear()
-      } });
+      };
+      demoStore.push({ k, pin: p.pin, member });
+      resolve({ ok: true, returning: false, member });
     }, 700));
   }
 
   /* ---------- photo (stays in the browser) ---------- */
   let photoImg = null, photoUrl = null;
+  const PHOTO_UIS = [
+    { input: '#photo',     thumb: '#thumb',     clear: '#photoClear',     err: 'photo' },
+    { input: '#findPhoto', thumb: '#findThumb', clear: '#findPhotoClear', err: 'findPhoto' }
+  ];
   function clearPhoto() {
     if (photoUrl) URL.revokeObjectURL(photoUrl);
     photoImg = null; photoUrl = null;
-    $('#photo').value = '';
-    $('#thumb').hidden = true; $('#photoClear').hidden = true;
-    showFieldError('photo', '');
+    PHOTO_UIS.forEach(u => {
+      $(u.input).value = '';
+      $(u.thumb).hidden = true; $(u.clear).hidden = true;
+      showFieldError(u.err, '');
+    });
   }
-  $('#photo').addEventListener('change', () => {
-    const f = $('#photo').files && $('#photo').files[0];
-    if (!f) return;
-    if (f.size > 15 * 1024 * 1024) { clearPhoto(); showFieldError('photo', t('e_photo_big')); return; }
-    const url = URL.createObjectURL(f);
-    const img = new Image();
-    img.onload = () => {
-      if (photoUrl) URL.revokeObjectURL(photoUrl);
-      photoImg = img; photoUrl = url;
-      $('#thumb').src = url; $('#thumb').hidden = false; $('#photoClear').hidden = false;
-      showFieldError('photo', '');
-    };
-    img.onerror = () => { URL.revokeObjectURL(url); clearPhoto(); showFieldError('photo', t('e_photo_bad')); };
-    img.src = url;
+  PHOTO_UIS.forEach(u => {
+    $(u.input).addEventListener('change', () => {
+      const f = $(u.input).files && $(u.input).files[0];
+      if (!f) return;
+      if (f.size > 15 * 1024 * 1024) { clearPhoto(); showFieldError(u.err, t('e_photo_big')); return; }
+      const url = URL.createObjectURL(f);
+      const img = new Image();
+      img.onload = () => {
+        if (photoUrl) URL.revokeObjectURL(photoUrl);
+        photoImg = img; photoUrl = url;
+        PHOTO_UIS.forEach(x => { $(x.thumb).src = url; $(x.thumb).hidden = false; $(x.clear).hidden = false; showFieldError(x.err, ''); });
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); clearPhoto(); showFieldError(u.err, t('e_photo_bad')); };
+      img.src = url;
+    });
+    $(u.clear).addEventListener('click', clearPhoto);
   });
-  $('#photoClear').addEventListener('click', clearPhoto);
 
   /* ---------- validation ---------- */
   const FIELDS = ['fullName', 'pin', 'relationship', 'standing', 'department', 'university', 'country'];
@@ -656,12 +743,12 @@
     el.addEventListener('change', () => showFieldError(id, ''));
   });
 
-  function showAlert(msg) { const a = $('#alert'); a.textContent = msg; a.hidden = false; a.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
-  function clearAlert() { $('#alert').hidden = true; }
-  function setBusy(b) {
-    const btn = $('#btnSubmit');
+  function showAlert(msg, id = 'alert') { const a = $('#' + id); a.textContent = msg; a.hidden = false; a.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+  function clearAlert() { $('#alert').hidden = true; $('#alertFind').hidden = true; }
+  function setBusy(b, btnId = 'btnSubmit', idle = 'b_submit', busy = 'b_submitting') {
+    const btn = $('#' + btnId);
     btn.disabled = b;
-    btn.textContent = b ? t('b_submitting') : t('b_submit');
+    btn.textContent = b ? t(busy) : t(idle);
   }
   const errText = code => (T['err_' + code] ? t('err_' + code) : t('err_server'));
 
@@ -690,6 +777,69 @@
       if (code === 'network') { status.state = 'offline'; renderStatus(); }
       showAlert(errText(code));
     } finally { setBusy(false); }
+  });
+
+  /* ---------- "get my card back" ---------- */
+  const FIND_FIELDS = ['findName', 'findUni', 'findPin'];
+  function validateFind() {
+    FIND_FIELDS.forEach(id => showFieldError(id, ''));
+    const v = id => $('#' + id).value.trim();
+    const bad = [];
+    if (!v('findName')) bad.push(['findName', t('e_required')]);
+    else if (v('findName').length > 60) bad.push(['findName', t('e_name_long')]);
+    if (!v('findUni')) bad.push(['findUni', t('e_required')]);
+    if (!/^\d{4}$/.test($('#findPin').value)) bad.push(['findPin', t('e_pin')]);
+    bad.forEach(([id, msg]) => showFieldError(id, msg));
+    if (bad.length) $('#' + bad[0][0]).focus();
+    return bad.length === 0;
+  }
+  FIND_FIELDS.forEach(id => {
+    const el = $('#' + id);
+    el.addEventListener('input', () => showFieldError(id, ''));
+    el.addEventListener('change', () => showFieldError(id, ''));
+  });
+  $('#findForm').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    clearAlert();
+    if (!validateFind()) return;
+    const payload = {
+      action: 'lookup',
+      fullName: $('#findName').value.trim(), university: $('#findUni').value.trim(),
+      pin: $('#findPin').value, website: $('#findWebsite').value
+    };
+    setBusy(true, 'btnFind', 'b_find', 'b_finding');
+    try {
+      const res = await callApi(payload);
+      if (res && res.ok && res.member) {
+        status.state = DEMO ? 'demo' : 'live'; renderStatus();
+        await showResult(res.member, true);
+      } else {
+        showAlert(errText(res && res.error === 'invalid_input' && res.field === 'action' ? 'old_backend' : (res && res.error ? res.error : 'server')), 'alertFind');
+      }
+    } catch (err) {
+      const code = err && err.code ? err.code : 'server';
+      if (code === 'network') { status.state = 'offline'; renderStatus(); }
+      showAlert(errText(code), 'alertFind');
+    } finally { setBusy(false, 'btnFind', 'b_find', 'b_finding'); }
+  });
+
+  /* ---------- tabs: Register / Get my card back ---------- */
+  function setTab(which, focusField) {
+    const isFind = which === 'find';
+    $('#panelReg').hidden = isFind; $('#panelFind').hidden = !isFind;
+    [['#tabReg', !isFind], ['#tabFind', isFind]].forEach(([sel, on]) => { $(sel).setAttribute('aria-selected', on ? 'true' : 'false'); $(sel).tabIndex = on ? 0 : -1; });
+    clearAlert();
+    try { history.replaceState(null, '', isFind ? '#find' : location.pathname + location.search); } catch (e) { /* not important */ }
+    if (focusField) $(isFind ? '#findName' : '#fullName').focus();
+  }
+  $('#tabReg').addEventListener('click', () => setTab('reg', true));
+  $('#tabFind').addEventListener('click', () => setTab('find', true));
+  $('.tabs').addEventListener('keydown', ev => {
+    if (ev.key !== 'ArrowLeft' && ev.key !== 'ArrowRight') return;
+    ev.preventDefault();
+    const toFind = $('#tabReg').getAttribute('aria-selected') === 'true';
+    setTab(toFind ? 'find' : 'reg', false);
+    $(toFind ? '#tabFind' : '#tabReg').focus();
   });
 
   /* =====================================================================
@@ -1124,6 +1274,7 @@
     const dn = $('#demoNote');
     dn.hidden = !DEMO;
     dn.textContent = t('r_demo');
+    $('#btnAnother').textContent = t(returning ? 'b_back' : 'b_another');
     $('#cardImg').alt = `Member card for ${member.fullName}, clearance code ${member.secCode}`;
   }
   async function showResult(member, returning) {
@@ -1147,18 +1298,19 @@
     }, 'image/png');
   });
   $('#btnAnother').addEventListener('click', () => {
-    $('#regForm').reset();
-    clearPhoto(); clearFieldErrors(); clearAlert();
+    $('#regForm').reset(); $('#findForm').reset();
+    clearPhoto(); clearFieldErrors(); FIND_FIELDS.forEach(id => showFieldError(id, '')); clearAlert();
     lastResult = null; currentCanvas = null;
     resetSelects();
     $('#viewResult').hidden = true;
     $('#viewForm').hidden = false;
     window.scrollTo({ top: 0 });
-    $('#fullName').focus();
+    $($('#panelFind').hidden ? '#fullName' : '#findName').focus();
   });
 
   resetSelects();
   renderStatus();
+  if (location.hash === '#find') setTab('find', false);
   checkRoster();
 })();
 </script>

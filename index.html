@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>U.S.S. A.L.E.X.I.S. Member Registration</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230B2A63'/%3E%3Ccircle cx='32' cy='32' r='16' fill='none' stroke='%234FB6F0' stroke-width='5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Antonio: page headings and card acronym. Exo 2: page text and card text. Orbitron: card name and code. Michroma: the tagline around the card logo.
+     Noto Sans TC is only a fallback so names typed in Chinese still draw correctly on the card. -->
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Exo+2:wght@400;500;600;700&family=Michroma&family=Orbitron:wght@500;600;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A1230;
+    --navy: #0B2A63;
+    --blue: #1B4FA8;
+    --cyan: #4FB6F0;
+    --pale: #9CC9F2;
+    --ice: #E8F1FB;
+    --silver: #C6C7CC;
+    --silver-dark: #8F8F97;
+    --muted: #4D5F80;
+    --danger: #C84B4B;
+    --side: 168px;
+    --bar: 44px;
+    --chamfer: 36px;
+    --display: Antonio, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    --tech: Orbitron, Antonio, "Noto Sans TC", sans-serif;
+    --body: "Exo 2", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    padding: 22px 18px 30px;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    background-color: #F4F8FD;
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(79,182,240,0.22), rgba(79,182,240,0) 60%),
+      linear-gradient(rgba(105,135,170,0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(105,135,170,0.10) 1px, transparent 1px);
+    background-size: auto, 27px 27px, 27px 27px;
+    background-attachment: fixed;
+  }
+  button, input, select { font: inherit; color: inherit; }
+  [hidden] { display: none !important; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---------- card-style frame: silver bezel, navy edge, white panel ---------- */
+  .frame {
+    max-width: 1180px;
+    margin: 0 auto;
+    min-height: calc(100vh - 52px);
+    display: grid;
+    grid-template-columns: var(--side) minmax(0, 1fr);
+    grid-template-rows: 124px 1fr;
+    grid-template-areas: "elbow top" "side main";
+    border: 14px solid transparent;
+    background:
+      linear-gradient(#FFFFFF, #FFFFFF) padding-box,
+      linear-gradient(90deg, #8F8F97, #E6E6EA 8%, #B1B1B8 18%, #D9DADE 40%, #C6C7CC 60%, #DADBDF 82%, #B1B1B8 92%, #8F8F97) border-box;
+    box-shadow: inset 0 0 0 5px var(--navy), inset 0 0 0 7px var(--cyan);
+    clip-path: polygon(var(--chamfer) 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% calc(100% - var(--chamfer)), calc(100% - var(--chamfer)) 100%, var(--chamfer) 100%, 0 calc(100% - var(--chamfer)), 0 var(--chamfer));
+  }
+  .elbow {
+    grid-area: elbow;
+    margin: 12px 0 0 12px;
+    background: linear-gradient(180deg, var(--navy), #061744);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0 22px 12px 14px;
+    font-family: var(--display);
+    font-weight: 700;
+    line-height: 1.05;
+  }
+  .elbow small { font-size: 18px; font-weight: 600; letter-spacing: .08em; color: var(--pale); }
+  .elbow strong { font-size: 25px; letter-spacing: .04em; }
+  .top { grid-area: top; position: relative; padding: 12px 12px 0 6px; }
+  .bar { display: flex; gap: 6px; height: calc(var(--bar) - 12px); }
+  .bar span { display: block; }
+  .bar .s1 { flex: 1; background: linear-gradient(90deg, var(--navy), var(--blue)); }
+  .bar .s2 { width: 120px; background: var(--cyan); }
+  .bar .s3 { width: 56px; background: var(--pale); }
+  .bar .s4 { width: 150px; background: linear-gradient(90deg, var(--silver-dark), #E6E6EA, var(--silver)); clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); }
+
+  .side { grid-area: side; display: flex; flex-direction: column; gap: 6px; padding: 6px 0 12px 12px; }
+  .blk {
+    min-height: 54px;
+    padding: 6px 14px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: right;
+    color: var(--ink);
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 1.1;
+    letter-spacing: .03em;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  }
+  .blk small { font-size: 15px; font-weight: 600; letter-spacing: .04em; }
+  .blk-status { background: linear-gradient(180deg, #E6E6EA, var(--silver)); min-height: 76px; }
+  .blk-status[data-state="live"] { background: var(--cyan); }
+  .blk-status[data-state="demo"], .blk-status[data-state="offline"] { background: var(--danger); color: #FFFFFF; }
+  .blk-date { background: var(--blue); color: #FFFFFF; }
+  .blk-fill {
+    flex: 1; min-height: 80px;
+    background:
+      repeating-linear-gradient(180deg, rgba(255,255,255,0.0) 0 22px, rgba(255,255,255,0.14) 22px 24px),
+      linear-gradient(180deg, var(--navy), var(--blue) 65%, var(--cyan));
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+
+  /* ---------- main ---------- */
+  main { grid-area: main; padding: 26px 30px 48px 34px; max-width: 920px; }
+  .toolbar { display: none; }
+  h1 {
+    margin: 0 0 10px;
+    font-family: var(--tech);
+    font-weight: 700;
+    font-size: clamp(26px, 4.4vw, 44px);
+    line-height: 1.15;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .intro { margin: 0 0 30px; max-width: 62ch; color: var(--muted); }
+  .intro em { font-style: normal; color: var(--blue); font-weight: 600; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 30px; }
+  .span2 { grid-column: 1 / -1; }
+  label, .label {
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 21px;
+    letter-spacing: .05em;
+    color: var(--blue);
+  }
+  .hint { margin: 6px 4px 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
+  .err { margin: 6px 4px 0; font-size: 14px; line-height: 1.5; color: #B3261E; font-weight: 500; }
+  input[type="text"], input[type="password"], select {
+    width: 100%;
+    height: 50px;
+    padding: 0 18px;
+    background: #FFFFFF;
+    border: 2px solid var(--pale);
+    border-radius: 10px;
+    color: var(--ink);
+    font-size: 17px;
+    box-shadow: inset 0 1px 3px rgba(11,42,99,0.08);
+  }
+  input::placeholder { color: #8A9AB5; }
+  input:focus, select:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 4px rgba(79,182,240,0.30); }
+  input:focus-visible, select:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+  input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--danger); }
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 48px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10'%3E%3Cpath d='M1 1l7 7 7-7' fill='none' stroke='%231B4FA8' stroke-width='3'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+  }
+  select option { background: #FFFFFF; color: var(--ink); }
+  .pin { letter-spacing: .5em; font-family: var(--tech); font-size: 20px; }
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .titles {
+    margin: 0;
+    padding: 12px 22px;
+    display: flex; flex-wrap: wrap; gap: 4px 28px;
+    border: 2px solid var(--pale);
+    border-radius: 12px;
+    background: linear-gradient(90deg, var(--ice), #FFFFFF);
+    color: var(--muted);
+    font-size: 16px;
+  }
+  .titles strong { font-family: var(--display); font-weight: 600; font-size: 24px; letter-spacing: .04em; color: var(--navy); }
+
+  .photo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+  .pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; padding: 0 22px;
+    border: 1.5px solid var(--silver-dark); border-radius: 10px;
+    background: linear-gradient(180deg, #F4F4F7, var(--silver));
+    color: var(--navy);
+    font-family: var(--display); font-weight: 700; font-size: 19px; letter-spacing: .04em;
+    cursor: pointer;
+  }
+  .pill:hover { background: linear-gradient(180deg, #FFFFFF, #DADBDF); }
+  .pill-ghost { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+  .pill-ghost:hover { background: var(--blue); color: #FFFFFF; }
+  .sr:focus-visible + .pill { outline: 3px solid var(--cyan); outline-offset: 3px; }
+  .thumb { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 3px solid var(--cyan); }
+
+  .go {
+    width: 100%;
+    min-height: 60px;
+    border: 2px solid #0A1B45;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #2A6FD6, var(--navy));
+    color: #FFFFFF;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 3px 0 var(--cyan);
+  }
+  .go:hover:not(:disabled) { background: linear-gradient(180deg, #3B84EE, #12408F); }
+  .go:disabled { opacity: .55; cursor: progress; }
+
+  .alert {
+    margin: 0 0 24px;
+    padding: 14px 22px;
+    background: #FDECEC;
+    border: 2px solid #E39A9A;
+    color: #7A1B1B;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+  .alert.note { background: var(--ice); border-color: var(--pale); color: var(--navy); }
+
+  /* ---------- result ---------- */
+  .result-grid { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); gap: 40px; align-items: start; }
+  .card-wrap img { display: block; width: 100%; height: auto; filter: drop-shadow(0 14px 22px rgba(10,27,69,0.28)); }
+  .result h2 {
+    margin: 0 0 8px;
+    font-family: var(--tech);
+    font-weight: 700;
+    font-size: clamp(22px, 3.4vw, 34px);
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .result h2:focus { outline: none; }
+  .result-text p { margin: 0 0 14px; }
+  .actions { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin: 22px 0 14px; }
+  .actions .go { width: auto; padding: 0 34px; }
+  .legal { margin: 44px 0 0; max-width: 62ch; font-size: 14px; color: var(--muted); }
+
+  /* ---------- narrow screens ---------- */
+  @media (max-width: 760px) {
+    :root { --side: 60px; --bar: 34px; --chamfer: 22px; }
+    body { padding: 8px 8px 16px; }
+    .frame { grid-template-rows: 92px 1fr; border-width: 10px; min-height: calc(100vh - 24px); }
+    .elbow { margin: 8px 0 0 8px; padding: 0 8px 8px; }
+    .elbow small, .elbow strong { display: none; }
+    .top { padding: 8px 8px 0 4px; }
+    .bar .s2, .bar .s3 { display: none; }
+    .bar .s4 { width: 90px; }
+    .side { padding-left: 8px; }
+    .side .blk-status, .side .blk-date { display: none; }
+    main { padding: 18px 16px 40px 16px; }
+    .toolbar { display: flex; margin-bottom: 18px; }
+    .chip { display: inline-flex; align-items: center; min-height: 38px; padding: 0 16px; border-radius: 10px; font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--ink); background: linear-gradient(180deg, #E6E6EA, var(--silver)); }
+    .chip[data-state="live"] { background: var(--cyan); }
+    .chip[data-state="demo"], .chip[data-state="offline"] { background: var(--danger); color: #FFFFFF; }
+    .grid { grid-template-columns: 1fr; gap: 20px; }
+    .result-grid { grid-template-columns: 1fr; gap: 24px; }
+    .card-wrap { max-width: 420px; }
+    .actions .go { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<noscript><p style="padding:24px;color:#B3261E">This page needs JavaScript.</p></noscript>
+
+<div class="frame">
+  <div class="elbow" aria-hidden="true"><small>U.S.S.</small><strong>A.L.E.X.I.S.</strong></div>
+  <div class="top" aria-hidden="true">
+    <div class="bar"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="s4"></span></div>
+  </div>
+
+  <nav class="side" aria-label="Status">
+    <div class="blk blk-status js-status" data-state="checking" role="status"><span class="js-status-label"></span><small class="js-status-sub"></small></div>
+    <div class="blk blk-date"><small>Stardate</small><span id="stardate"></span></div>
+    <div class="blk blk-fill" aria-hidden="true"></div>
+  </nav>
+
+  <main id="main">
+    <div class="toolbar">
+      <span class="chip js-status" data-state="checking" role="status"><span class="js-status-label"></span></span>
+    </div>
+
+    <div id="viewForm">
+      <h1>Member registration</h1>
+      <p class="intro">Join the crew of the U.S.S. A.L.E.X.I.S., short for <em>Adaptive Learning, Education, and eXperimental Intelligence for Society</em>. Your details are saved to the member roster, and your member card is made on this page.</p>
+
+      <div id="alert" class="alert" role="alert" hidden></div>
+
+      <form id="regForm" novalidate autocomplete="off">
+        <div class="grid">
+          <div>
+            <label for="fullName">Full name</label>
+            <input type="text" id="fullName" name="fullName" maxlength="60" autocomplete="name" placeholder="e.g. Alexis Tan" aria-describedby="h_name e_fullName">
+            <p class="hint" id="h_name">Given name first, family name last. Chinese names are fine too.</p>
+            <p class="err" id="e_fullName" hidden></p>
+          </div>
+          <div>
+            <label for="pin">PIN</label>
+            <input type="password" id="pin" name="pin" class="pin" inputmode="numeric" maxlength="4" autocomplete="new-password" aria-describedby="h_pin e_pin">
+            <p class="hint" id="h_pin">4 digits. You need it to get your card again, so pick one you will remember.</p>
+            <p class="err" id="e_pin" hidden></p>
+          </div>
+          <div>
+            <label for="relationship">Relationship</label>
+            <select id="relationship" name="relationship" aria-describedby="h_rel e_relationship"></select>
+            <p class="hint" id="h_rel">Choose the one that fits you best.</p>
+            <p class="err" id="e_relationship" hidden></p>
+          </div>
+          <div>
+            <label for="standing">Standing</label>
+            <select id="standing" name="standing" aria-describedby="e_standing"></select>
+            <p class="err" id="e_standing" hidden></p>
+          </div>
+          <div class="span2">
+            <p class="titles" id="titlePreview" aria-live="polite"></p>
+          </div>
+          <div>
+            <label for="department">Department or major</label>
+            <input type="text" id="department" name="department" maxlength="80" placeholder="e.g. International Management" aria-describedby="e_department">
+            <p class="err" id="e_department" hidden></p>
+          </div>
+          <div>
+            <label for="university">University</label>
+            <input type="text" id="university" name="university" maxlength="80" placeholder="e.g. YunTech" aria-describedby="e_university">
+            <p class="err" id="e_university" hidden></p>
+          </div>
+          <div>
+            <label for="country">Country or region</label>
+            <input type="text" id="country" name="country" maxlength="60" list="countries" placeholder="e.g. Malaysia" aria-describedby="h_country e_country">
+            <datalist id="countries"></datalist>
+            <p class="hint" id="h_country">Pick from the list to get your flag on the card.</p>
+            <p class="err" id="e_country" hidden></p>
+          </div>
+          <div>
+            <label for="motto">Personal motto</label>
+            <select id="motto" name="motto"></select>
+          </div>
+          <div class="span2">
+            <span class="label">Photo (optional)</span>
+            <div class="photo-row">
+              <input type="file" id="photo" class="sr" accept="image/*">
+              <label for="photo" class="pill" id="photoBtn" style="margin:0">Choose photo</label>
+              <img id="thumb" class="thumb" alt="" hidden>
+              <button type="button" id="photoClear" class="pill pill-ghost" hidden>Remove photo</button>
+            </div>
+            <p class="hint">Your photo stays on this device. It is only used to draw your card and is never uploaded.</p>
+            <p class="err" id="e_photo" hidden></p>
+          </div>
+          <div class="trap" aria-hidden="true">
+            <label for="website">Leave this empty</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="span2">
+            <button type="submit" class="go" id="btnSubmit">Register and create my card</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <section id="viewResult" class="result" hidden aria-live="polite">
+      <div class="result-grid">
+        <div class="card-wrap"><img id="cardImg" alt=""></div>
+        <div class="result-text">
+          <div id="demoNote" class="alert note" hidden></div>
+          <h2 id="resultTitle" tabindex="-1"></h2>
+          <p id="resultSub"></p>
+          <div class="actions">
+            <button type="button" class="go" id="btnDownload">Download card</button>
+            <button type="button" class="pill pill-ghost" id="btnAnother">Register another member</button>
+          </div>
+          <p class="hint">On a phone, press and hold the card, then choose Save image.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="legal">Fan-made for fun. The member card is not an ID document, and this page is not affiliated with Star Trek or any school.</p>
+  </main>
+</div>
+
+<!-- Logo and country flags for the card, embedded so the card can be saved from any location -->
+<script src="assets.js"></script>
+<script>
+(() => {
+  'use strict';
+
+  /* =====================================================================
+     SETTINGS. The only line you normally need to edit is API_URL.
+     Paste the web app URL you get from Google Apps Script (ends in /exec).
+     While it still says PASTE_..., the page runs in DEMO MODE and
+     nothing is saved anywhere.
+
+     LOGO_URL is optional. Leave it empty to use the logo built into
+     assets.js. To use a sharper logo, put a file called logo.png next to
+     index.html and set LOGO_URL to 'logo.png' (works on the GitHub Pages site).
+     ===================================================================== */
+  const CONFIG = {
+    API_URL: 'https://script.google.com/macros/s/AKfycbxJ38hVX6uRip_D7ykoXMV56s_ryeYtBAUetszu4HyHWuF8qvPsRB2fEXSAQuZMK0Pq/exec',
+    LOGO_URL: '',
+    TIMEOUT_MS: 25000
+  };
+  const DEMO = /PASTE_/.test(CONFIG.API_URL) || new URLSearchParams(location.search).has('demo');
+
+  /* ---------- choice lists ----------
+     Relationship -> Primary Role, Standing -> Academic Level.
+     v = value stored in the Sheet and sent to the server; title = the Starfleet title it maps to.
+     The same mapping lives in Code.gs (the server is the one that counts). */
+  const RELATIONSHIPS = [
+    { v: 'RA',            label: 'Research assistant (RA)', title: 'Vulcan Science Academy Fellow' },
+    { v: 'TA',            label: 'Teaching assistant (TA)', title: 'Chief Tactical Officer' },
+    { v: 'Mentored',      label: 'Mentored student',        title: 'Starfleet Academy Cadet' },
+    { v: 'International', label: 'International student',   title: 'Federation Diplomatic Envoy' },
+    { v: 'Exchange',      label: 'Exchange student',        title: 'Federation Exchange Officer' },
+    { v: 'EMBA',          label: 'EMBA student',            title: 'Civilian Enterprise Consultant' }
+  ];
+  const STANDINGS = [
+    { v: 'Freshman',  label: 'Freshman',                  title: 'Ensign' },
+    { v: 'Sophomore', label: 'Sophomore',                 title: 'Lieutenant Junior' },
+    { v: 'Junior',    label: 'Junior',                    title: 'Lieutenant' },
+    { v: 'Senior',    label: 'Senior',                    title: 'Lieutenant Commander' },
+    { v: 'Graduate',  label: 'Graduate student',          title: 'Commander' },
+    { v: 'Bachelor',  label: "Bachelor's degree holder",  title: 'Starfleet Graduate' },
+    { v: 'Master',    label: "Master's degree holder",    title: 'Senior Staff Officer' },
+    { v: 'PhD',       label: 'PhD',                       title: 'Federation Scientist' },
+    { v: 'Industry',  label: 'Industry professional',     title: 'Commodore' }
+  ];
+  const MOTTOS = [
+    'Engage and innovate.',
+    'Adapt, Explore, and Overcome.',
+    'Knowledge is the ultimate frontier.',
+    'Highly illogical, yet highly interesting.'
+  ];
+  /* Country suggestions, and the names that map to a flag in assets.js */
+  const COUNTRY_NAMES = {
+    TW: ['Taiwan', 'roc', 'republic of china', 'chinese taipei'], MY: ['Malaysia'], ID: ['Indonesia'],
+    VN: ['Vietnam', 'viet nam'], TH: ['Thailand'], PH: ['Philippines', 'the philippines'], SG: ['Singapore'],
+    JP: ['Japan'], KR: ['South Korea', 'korea', 'republic of korea'], HK: ['Hong Kong', 'hk'],
+    MO: ['Macau', 'macao'], CN: ['China', 'prc', 'mainland china', "people's republic of china"], IN: ['India'],
+    US: ['United States', 'usa', 'us', 'u.s.', 'u.s.a.', 'america', 'united states of america'],
+    CA: ['Canada'], GB: ['United Kingdom', 'uk', 'u.k.', 'britain', 'great britain', 'england', 'scotland', 'wales'],
+    AU: ['Australia'], DE: ['Germany'], FR: ['France'], NZ: ['New Zealand'], MM: ['Myanmar', 'burma'],
+    KH: ['Cambodia'], MN: ['Mongolia'], BN: ['Brunei'], LA: ['Laos']
+  };
+  const countryCode = s => {
+    const k = String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    for (const code in COUNTRY_NAMES) if (COUNTRY_NAMES[code].some(n => n.toLowerCase() === k)) return code;
+    return null;
+  };
+
+  /* ---------- text ---------- */
+  const T = {
+    choose: 'Choose one',
+    t_pick: 'Choose your relationship and standing to see your titles.', t_role: 'Your role:', t_level: 'Your academic level:',
+    b_submit: 'Register and create my card', b_submitting: 'Registering…',
+    s_checking: 'Checking roster', s_live: 'Roster online', s_offline: 'Roster offline', s_demo: 'Demo mode',
+    s_demo_sub: 'Nothing is saved', s_offline_sub: 'Try again later',
+    e_required: 'Fill in this field.', e_pin: 'Enter exactly 4 digits.', e_name_long: 'Use 60 characters or fewer.',
+    e_photo_bad: 'This file could not be read as an image. Choose a JPG or PNG.', e_photo_big: 'This photo is over 15 MB. Choose a smaller one.',
+    err_invalid_input: 'The roster rejected one of the answers. Check the form and try again.',
+    err_name_taken: 'This name is already registered at this university. Enter the PIN you used before to get your card again.',
+    err_busy: 'The roster is busy. Try again in a few seconds.',
+    err_network: 'Could not reach the roster. Check your connection and try again.',
+    err_timeout: 'The roster took too long to answer. Try again; registering twice is safe and will not create a duplicate.',
+    err_bad_response: 'The roster sent an unexpected reply. If you are the site owner, check that the web app is deployed with access set to Anyone.',
+    err_server: 'Something went wrong on the roster side. Try again, and tell Alexis if it keeps happening.',
+    r_welcome: 'Welcome aboard, {name}.', r_back: 'Welcome back, {name}.',
+    r_sub: 'Your clearance code is {code}.', r_sub_back: 'We found your registration. Here is your card again, code {code}.',
+    r_demo: 'Demo mode: this registration was not saved. Connect the page to your Google Sheet to save real registrations.'
+  };
+  const t = (key, vars) => {
+    let s = T[key] || key;
+    if (vars) for (const k in vars) s = s.split('{' + k + '}').join(vars[k]);
+    return s;
+  };
+
+  /* ---------- helpers ---------- */
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const pad = (n, w) => String(n).padStart(w, '0');
+  const find = (list, v) => list.find(x => x.v === v);
+
+  function stardate() {
+    const d = new Date();
+    const doy = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 86400000);
+    return d.getFullYear() + '.' + pad(doy, 3);
+  }
+  $('#stardate').textContent = stardate();
+
+  /* ---------- form setup ---------- */
+  let status = { state: DEMO ? 'demo' : 'checking' };
+  let lastResult = null;
+
+  function fillSelect(sel, items, withPlaceholder) {
+    const keep = sel.value;
+    sel.innerHTML = '';
+    if (withPlaceholder) sel.appendChild(new Option(t('choose'), ''));
+    items.forEach(o => sel.appendChild(typeof o === 'string' ? new Option(o, o) : new Option(o.label, o.v)));
+    if (keep) sel.value = keep;
+  }
+  function renderTitles() {
+    const box = $('#titlePreview');
+    const r = find(RELATIONSHIPS, $('#relationship').value);
+    const s = find(STANDINGS, $('#standing').value);
+    box.textContent = '';
+    if (!r && !s) { box.textContent = t('t_pick'); return; }
+    const add = (lab, val) => {
+      const sp = document.createElement('span');
+      sp.append(lab + ' ');
+      const b = document.createElement('strong'); b.textContent = val;
+      sp.appendChild(b); box.appendChild(sp);
+    };
+    if (r) add(t('t_role'), r.title);
+    if (s) add(t('t_level'), s.title);
+  }
+  function resetSelects() {
+    fillSelect($('#relationship'), RELATIONSHIPS, true);
+    fillSelect($('#standing'), STANDINGS, true);
+    fillSelect($('#motto'), MOTTOS);
+    renderTitles();
+  }
+  function renderStatus() {
+    const s = status.state;
+    $$('.js-status').forEach(el => { el.dataset.state = s; });
+    const text = s === 'live' ? t('s_live') : s === 'offline' ? t('s_offline') : s === 'demo' ? t('s_demo') : t('s_checking');
+    const sub = s === 'demo' ? t('s_demo_sub') : s === 'offline' ? t('s_offline_sub') : '';
+    $$('.js-status-label').forEach(el => { el.textContent = text; });
+    $$('.js-status-sub').forEach(el => { el.textContent = sub; });
+  }
+  $('#countries').innerHTML = Object.values(COUNTRY_NAMES).map(n => `<option value="${n[0]}">`).join('');
+  $('#relationship').addEventListener('change', renderTitles);
+  $('#standing').addEventListener('change', renderTitles);
+
+  /* ---------- roster connection ---------- */
+  async function checkRoster() {
+    if (DEMO) { status.state = 'demo'; renderStatus(); return; }
+    try {
+      const ctrl = new AbortController();
+      const to = setTimeout(() => ctrl.abort(), 12000);
+      const res = await fetch(CONFIG.API_URL, { method: 'GET', signal: ctrl.signal });
+      clearTimeout(to);
+      const data = await res.json();
+      status.state = data && data.ok ? 'live' : 'offline';
+    } catch (e) { status.state = 'offline'; }
+    renderStatus();
+  }
+
+  async function callApi(payload) {
+    if (DEMO) return demoApi(payload);
+    const ctrl = new AbortController();
+    const to = setTimeout(() => ctrl.abort(), CONFIG.TIMEOUT_MS);
+    let res;
+    try {
+      /* text/plain keeps this a "simple" request, so the browser skips the
+         CORS preflight that Apps Script cannot answer. */
+      res = await fetch(CONFIG.API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload),
+        signal: ctrl.signal
+      });
+    } catch (e) {
+      throw { code: e && e.name === 'AbortError' ? 'timeout' : 'network' };
+    } finally { clearTimeout(to); }
+    try { return await res.json(); } catch (e) { throw { code: 'bad_response' }; }
+  }
+
+  /* Demo only: a rough stand-in for the server so the page can be previewed.
+     The real SEC-CODE rules live in apps-script/Code.gs. */
+  function demoApi(p) {
+    return new Promise(resolve => setTimeout(() => {
+      const d = (p.department || '').toUpperCase();
+      const dept = /INTERNATIONAL/.test(d) ? 'BIM' : /MANAGEMENT|BUSINESS/.test(d) ? 'COM'
+        : /ENGINEERING|COMPUTER/.test(d) ? 'ENG' : /DESIGN|LANGUAGE|\bARTS?\b/.test(d) ? 'ART' : 'GEN';
+      const name = p.fullName.trim(), words = name.split(/\s+/);
+      const ini = /[㐀-鿿]/.test(name[0]) ? name[0] : words[words.length - 1][0].toUpperCase();
+      const aff = /YUNTECH|YUNLIN/i.test(p.university) ? 'DELTA' : 'GAMMA';
+      resolve({ ok: true, returning: false, member: {
+        memberId: 7, secCode: `007-${dept}-${ini}-${aff}`, fullName: name,
+        role: (find(RELATIONSHIPS, p.relationship) || RELATIONSHIPS[2]).title,
+        level: (find(STANDINGS, p.standing) || STANDINGS[0]).title,
+        relationship: p.relationship, standing: p.standing,
+        department: p.department.trim(), university: p.university.trim(), country: p.country.trim(),
+        motto: p.motto, since: new Date().getFullYear()
+      } });
+    }, 700));
+  }
+
+  /* ---------- photo (stays in the browser) ---------- */
+  let photoImg = null, photoUrl = null;
+  function clearPhoto() {
+    if (photoUrl) URL.revokeObjectURL(photoUrl);
+    photoImg = null; photoUrl = null;
+    $('#photo').value = '';
+    $('#thumb').hidden = true; $('#photoClear').hidden = true;
+    showFieldError('photo', '');
+  }
+  $('#photo').addEventListener('change', () => {
+    const f = $('#photo').files && $('#photo').files[0];
+    if (!f) return;
+    if (f.size > 15 * 1024 * 1024) { clearPhoto(); showFieldError('photo', t('e_photo_big')); return; }
+    const url = URL.createObjectURL(f);
+    const img = new Image();
+    img.onload = () => {
+      if (photoUrl) URL.revokeObjectURL(photoUrl);
+      photoImg = img; photoUrl = url;
+      $('#thumb').src = url; $('#thumb').hidden = false; $('#photoClear').hidden = false;
+      showFieldError('photo', '');
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); clearPhoto(); showFieldError('photo', t('e_photo_bad')); };
+    img.src = url;
+  });
+  $('#photoClear').addEventListener('click', clearPhoto);
+
+  /* ---------- validation ---------- */
+  const FIELDS = ['fullName', 'pin', 'relationship', 'standing', 'department', 'university', 'country'];
+  function showFieldError(id, msg) {
+    const e = $('#e_' + id), input = $('#' + id);
+    if (!e) return;
+    e.hidden = !msg; e.textContent = msg || '';
+    if (input && input.type !== 'file') input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+  function clearFieldErrors() { FIELDS.forEach(id => showFieldError(id, '')); }
+  function validate() {
+    clearFieldErrors();
+    const v = id => $('#' + id).value.trim();
+    const bad = [];
+    if (!v('fullName')) bad.push(['fullName', t('e_required')]);
+    else if (v('fullName').length > 60) bad.push(['fullName', t('e_name_long')]);
+    if (!/^\d{4}$/.test($('#pin').value)) bad.push(['pin', t('e_pin')]);
+    ['relationship', 'standing', 'department', 'university', 'country'].forEach(id => { if (!v(id)) bad.push([id, t('e_required')]); });
+    bad.forEach(([id, msg]) => showFieldError(id, msg));
+    if (bad.length) $('#' + bad[0][0]).focus();
+    return bad.length === 0;
+  }
+  FIELDS.forEach(id => {
+    const el = $('#' + id);
+    el.addEventListener('input', () => showFieldError(id, ''));
+    el.addEventListener('change', () => showFieldError(id, ''));
+  });
+
+  function showAlert(msg) { const a = $('#alert'); a.textContent = msg; a.hidden = false; a.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+  function clearAlert() { $('#alert').hidden = true; }
+  function setBusy(b) {
+    const btn = $('#btnSubmit');
+    btn.disabled = b;
+    btn.textContent = b ? t('b_submitting') : t('b_submit');
+  }
+  const errText = code => (T['err_' + code] ? t('err_' + code) : t('err_server'));
+
+  $('#regForm').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    clearAlert();
+    if (!validate()) return;
+    const val = id => $('#' + id).value.trim();
+    const payload = {
+      action: 'register',
+      fullName: val('fullName'), pin: $('#pin').value, relationship: $('#relationship').value, standing: $('#standing').value,
+      department: val('department'), university: val('university'), country: val('country'),
+      motto: $('#motto').value, website: $('#website').value
+    };
+    setBusy(true);
+    try {
+      const res = await callApi(payload);
+      if (res && res.ok && res.member) {
+        status.state = DEMO ? 'demo' : 'live'; renderStatus();
+        await showResult(res.member, !!res.returning);
+      } else {
+        showAlert(errText(res && res.error ? res.error : 'server'));
+      }
+    } catch (err) {
+      const code = err && err.code ? err.code : 'server';
+      if (code === 'network') { status.state = 'offline'; renderStatus(); }
+      showAlert(errText(code));
+    } finally { setBusy(false); }
+  });
+
+  /* =====================================================================
+     MEMBER CARD. Drawn on a canvas in the browser, 1200 x 1800 design units
+     at 2x (2400 x 3600 pixels). Nothing here is uploaded anywhere.
+     ===================================================================== */
+  const W = 1200, H = 1800, SCALE = 2;
+  const K = { ink: '#0A1230', navy: '#14396F', blue: '#1B4FA8', cyan: '#4FB6F0', pale: '#9CC9F2', ice: '#DCE9F7' };
+  const CJK = '"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif';
+  const ORB = (w, s) => `${w} ${s}px Orbitron, ${CJK}`;
+  const EXO = (w, s) => `${w} ${s}px "Exo 2", ${CJK}`;
+  const ANT = (w, s) => `${w} ${s}px Antonio, ${CJK}`;
+  const MIC = (w, s) => `${w} ${s}px Michroma, Orbitron, ${CJK}`;
+
+  /* One text helper: shrinks to fit maxW, then trims with an ellipsis if it still does not fit. */
+  function text(ctx, str, x, y, o) {
+    ctx.save();
+    let size = o.size;
+    ctx.textAlign = o.align || 'left';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = o.color;
+    if ('letterSpacing' in ctx) ctx.letterSpacing = (o.ls || 0) + 'px';
+    ctx.font = o.font(o.weight, size);
+    if (o.maxW) {
+      while (ctx.measureText(str).width > o.maxW && size > (o.min || 16)) { size -= 2; ctx.font = o.font(o.weight, size); }
+      if (ctx.measureText(str).width > o.maxW) {
+        while (str.length > 1 && ctx.measureText(str + '…').width > o.maxW) str = str.slice(0, -1);
+        str += '…';
+      }
+    }
+    ctx.fillText(str, x, y);
+    ctx.restore();
+  }
+
+
+  /* Text curved around the bottom of a circle, letters upright, tops pointing at the centre.
+     Fits the whole string into spanDeg degrees at baseline radius r (font size is worked out, capped at maxSize). */
+  function arcText(ctx, str, cx, cy, r, spanDeg, o) {
+    ctx.save();
+    ctx.font = o.font(o.weight, 100);
+    const chars = Array.from(str);
+    const base = chars.reduce((t, c) => t + ctx.measureText(c).width, 0) / 100;       // width per 1px of font
+    const size = Math.min(o.maxSize, (r * spanDeg * Math.PI / 180) / (base + 0.04 * (chars.length - 1)));
+    ctx.font = o.font(o.weight, size);
+    const gap = (r * spanDeg * Math.PI / 180 - base * size) / Math.max(1, chars.length - 1);   // spreads any slack
+    const total = base * size + gap * (chars.length - 1);
+    let pos = -total / 2;
+    ctx.fillStyle = o.color; ctx.strokeStyle = o.color; ctx.lineWidth = o.stroke || 0;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    chars.forEach(c => {
+      const w = ctx.measureText(c).width;
+      const theta = Math.PI / 2 - (pos + w / 2) / r;                                   // left to right = angle decreasing
+      ctx.save();
+      ctx.translate(cx + Math.cos(theta) * r, cy + Math.sin(theta) * r);
+      ctx.rotate(theta - Math.PI / 2);
+      ctx.fillText(c, 0, 0);
+      if (o.stroke) ctx.strokeText(c, 0, 0);
+      ctx.restore();
+      pos += w + gap;
+    });
+    ctx.restore();
+  }
+
+  /* The A.L.E.X.I.S. line: parts flagged big are the capital letters of the acronym. */
+  function acronymLine(ctx, parts, cx, y, maxW) {
+    const BIG = 64, SMALL = 50;
+    const measure = s => {
+      let total = 0;
+      parts.forEach(([str, big]) => { ctx.font = ANT(700, (big ? BIG : SMALL) * s); total += ctx.measureText(str).width; });
+      return total;
+    };
+    let s = 1;
+    const w0 = measure(1);
+    if (w0 > maxW) s = maxW / w0;
+    let x = cx - measure(s) / 2;
+    ctx.save();
+    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    parts.forEach(([str, big]) => {
+      ctx.font = ANT(700, (big ? BIG : SMALL) * s);
+      ctx.fillStyle = big ? K.blue : K.ink;
+      ctx.fillText(str, x, y);
+      x += ctx.measureText(str).width;
+    });
+    ctx.restore();
+  }
+
+  /* Card shell. o.l / o.t / o.b = how far inside the outer edge (sides, top, bottom),
+     o.c = corner cut, o.tu / o.bu = how far the top / bottom centre notch rises,
+     o.bump = how far the side panels push inward between y 535 and 1330. */
+  const X0 = 39, X1 = 1161, Y0 = 34, Y1 = 1766;
+  function shell(ctx, o) {
+    const L = X0 + o.l, R = X1 - o.l, T = Y0 + o.t, B = Y1 - o.b;
+    const c = o.c, tu = o.tu || 0, bu = o.bu || 0, bp = o.bump || 0, b1 = 535, b2 = 1330;
+    ctx.beginPath();
+    ctx.moveTo(L + c, T);
+    ctx.lineTo(390, T); ctx.lineTo(420, T - tu); ctx.lineTo(780, T - tu); ctx.lineTo(810, T);
+    ctx.lineTo(R - c, T); ctx.lineTo(R, T + c);
+    if (bp) { ctx.lineTo(R, b1); ctx.lineTo(R - bp, b1 + bp); ctx.lineTo(R - bp, b2 - bp); ctx.lineTo(R, b2); }
+    ctx.lineTo(R, B - c); ctx.lineTo(R - c, B);
+    ctx.lineTo(830, B); ctx.lineTo(795, B - bu); ctx.lineTo(405, B - bu); ctx.lineTo(370, B);
+    ctx.lineTo(L + c, B); ctx.lineTo(L, B - c);
+    if (bp) { ctx.lineTo(L, b2); ctx.lineTo(L + bp, b2 - bp); ctx.lineTo(L + bp, b1 + bp); ctx.lineTo(L, b1); }
+    ctx.lineTo(L, T + c);
+    ctx.closePath();
+  }
+  const SHELL = {
+    out:    { l: 0,  t: 0,  b: 0,  c: 57 },
+    silver: { l: 5,  t: 4,  b: 5,  c: 53 },
+    navy:   { l: 28, t: 32, b: 26, c: 44, tu: 28, bu: 26 },
+    white:  { l: 60, t: 62, b: 31, c: 38, tu: 33, bu: 26, bump: 35 },
+    trace:  { l: 73, t: 73, b: 44, c: 30, tu: 33, bu: 26, bump: 35 }
+  };
+  function framePath(ctx, name) { shell(ctx, SHELL[name]); }
+  function bracket(ctx, x, y, dx, dy, len) {
+    ctx.beginPath();
+    ctx.moveTo(x + dx * len, y); ctx.lineTo(x, y); ctx.lineTo(x, y + dy * len);
+    ctx.stroke();
+  }
+  const rad = deg => deg * Math.PI / 180;
+
+  function loadImg(src) {
+    return new Promise(resolve => {
+      if (!src) return resolve(null);
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => resolve(null);
+      img.src = src;
+    });
+  }
+  async function loadLogo() {
+    if (CONFIG.LOGO_URL) {
+      const custom = await loadImg(CONFIG.LOGO_URL);   // only works when hosted (GitHub Pages)
+      if (custom) return custom;
+    }
+    return loadImg(window.ALEXIS_ASSETS && window.ALEXIS_ASSETS.LOGO);
+  }
+
+  async function drawCard(m) {
+    const title1 = String(m.level || '').toUpperCase(), title2 = String(m.role || '').toUpperCase();
+    const name = String(m.fullName || '').toUpperCase();
+    const code = countryCode(m.country);
+    const assets = window.ALEXIS_ASSETS || { FLAGS: {} };
+    const [logo, flag] = await Promise.all([loadLogo(), loadImg(code && assets.FLAGS && assets.FLAGS[code])]);
+
+    const everything = [m.fullName, m.country, m.role, m.level, m.motto].join('');
+    try {
+      const jobs = ['500 40px Orbitron', '600 40px Orbitron', '700 40px Orbitron', '500 40px "Exo 2"', '700 40px "Exo 2"', '700 40px Antonio', '400 40px Michroma']
+        .map(f => document.fonts.load(f, 'ABC abc 123'));
+      if (/[㐀-鿿]/.test(everything)) jobs.push(document.fonts.load('700 40px "Noto Sans TC"', everything));
+      await Promise.all(jobs);
+    } catch (e) { /* fall back to system fonts */ }
+
+    const cv = document.createElement('canvas');
+    cv.width = W * SCALE; cv.height = H * SCALE;
+    const ctx = cv.getContext('2d');
+    ctx.scale(SCALE, SCALE);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+
+    // ----- frame: dark outline, brushed silver, navy band, white card -----
+    ctx.fillStyle = '#0A1B45'; framePath(ctx, 'out'); ctx.fill();
+    const metal = ctx.createLinearGradient(X0, 0, X1, 0);
+    [[0, '#8F8F97'], [.06, '#E6E6EA'], [.14, '#B1B1B8'], [.3, '#D9DADE'], [.5, '#C6C7CC'], [.7, '#DADBDF'], [.86, '#B1B1B8'], [.94, '#E6E6EA'], [1, '#8F8F97']]
+      .forEach(([p, c]) => metal.addColorStop(p, c));
+    ctx.fillStyle = metal; framePath(ctx, 'silver'); ctx.fill();
+    const sheen = ctx.createLinearGradient(0, Y0, 0, Y1);
+    sheen.addColorStop(0, 'rgba(255,255,255,0.5)'); sheen.addColorStop(.1, 'rgba(255,255,255,0)');
+    sheen.addColorStop(.9, 'rgba(0,0,0,0)'); sheen.addColorStop(1, 'rgba(60,60,80,0.28)');
+    ctx.fillStyle = sheen; framePath(ctx, 'silver'); ctx.fill();
+
+    const navy = ctx.createLinearGradient(0, Y0, 0, Y1);
+    navy.addColorStop(0, '#061744'); navy.addColorStop(.5, '#0B2A63'); navy.addColorStop(1, '#061744');
+    ctx.fillStyle = navy; framePath(ctx, 'navy'); ctx.fill();
+    ctx.save();
+    ctx.shadowColor = 'rgba(90,190,250,0.85)'; ctx.shadowBlur = 8;
+    ctx.strokeStyle = '#3A86DA'; ctx.lineWidth = 2.5; framePath(ctx, 'navy'); ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle = '#FFFFFF'; framePath(ctx, 'white'); ctx.fill();
+    ctx.strokeStyle = '#2C66B3'; ctx.lineWidth = 2.5; framePath(ctx, 'white'); ctx.stroke();
+    ctx.strokeStyle = '#0A1B45'; ctx.lineWidth = 4; framePath(ctx, 'out'); ctx.stroke();
+
+    // light-blue highlights on the top silver
+    ctx.fillStyle = '#7CCBF1';
+    [[276, 368, 1], [832, 924, -1]].forEach(([a, b, d]) => {
+      ctx.beginPath(); ctx.moveTo(a + 8 * d, 41); ctx.lineTo(b + 8 * d, 41); ctx.lineTo(b, 51); ctx.lineTo(a, 51); ctx.closePath(); ctx.fill();
+    });
+
+    // recessed plate at the bottom centre
+    const plate = ctx.createLinearGradient(405, 0, 795, 0);
+    plate.addColorStop(0, '#2B5A97'); plate.addColorStop(.5, '#8CC4F0'); plate.addColorStop(1, '#2B5A97');
+    ctx.fillStyle = plate; ctx.strokeStyle = '#0A1B45'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(418, 1726); ctx.lineTo(782, 1726); ctx.lineTo(764, 1756); ctx.lineTo(436, 1756); ctx.closePath();
+    ctx.fill(); ctx.stroke();
+
+    // side panels: a slotted window and a striped tab (mirrored on the right)
+    [false, true].forEach(mirror => {
+      ctx.save();
+      if (mirror) { ctx.translate(W, 0); ctx.scale(-1, 1); }
+      ctx.lineJoin = 'round'; ctx.lineCap = 'butt';
+      // window
+      ctx.fillStyle = '#FFFFFF'; ctx.strokeStyle = '#0A1B45'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(57, 614); ctx.lineTo(69, 600); ctx.lineTo(100, 600); ctx.lineTo(100, 1178); ctx.lineTo(69, 1178); ctx.lineTo(57, 1164); ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      // grey slot
+      const slot = ctx.createLinearGradient(61, 0, 75, 0);
+      slot.addColorStop(0, '#6E6E76'); slot.addColorStop(.45, '#C9C9CE'); slot.addColorStop(1, '#85858D');
+      ctx.fillStyle = slot; ctx.strokeStyle = '#23304F'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(61, 638); ctx.lineTo(67, 626); ctx.lineTo(75, 626); ctx.lineTo(75, 1136); ctx.lineTo(67, 1136); ctx.lineTo(61, 1124); ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.strokeStyle = '#3F8DE0'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(85, 626); ctx.lineTo(85, 1150); ctx.stroke();
+      // inner silver band that follows the side bump, with a bright blue edge
+      const stripPath = () => { ctx.beginPath(); [[82, 546], [82, 548], [117, 583], [117, 1282], [82, 1317], [82, 1319]].forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); };
+      ctx.lineJoin = 'miter'; ctx.lineCap = 'butt';
+      stripPath(); ctx.strokeStyle = '#0A1B45'; ctx.lineWidth = 27; ctx.stroke();
+      const rail = ctx.createLinearGradient(100, 0, 134, 0);
+      rail.addColorStop(0, '#9A9AA2'); rail.addColorStop(.45, '#F2F2F5'); rail.addColorStop(1, '#A6A6AE');
+      stripPath(); ctx.strokeStyle = rail; ctx.lineWidth = 22; ctx.stroke();
+      ctx.save(); ctx.translate(15, 0);
+      stripPath(); ctx.strokeStyle = '#3F88DC'; ctx.lineWidth = 3; ctx.shadowColor = 'rgba(90,190,250,0.8)'; ctx.shadowBlur = 6; ctx.stroke();
+      ctx.restore();
+      ctx.lineJoin = 'round';
+      // striped tab
+      const tab = ctx.createLinearGradient(46, 0, 112, 0);
+      tab.addColorStop(0, '#9C9CA4'); tab.addColorStop(.5, '#E8E8EC'); tab.addColorStop(1, '#A9A9B0');
+      ctx.fillStyle = tab; ctx.strokeStyle = '#0A1B45'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(46, 1222); ctx.lineTo(68, 1194); ctx.lineTo(112, 1194); ctx.lineTo(112, 1322); ctx.lineTo(46, 1322); ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.lineWidth = 7; ctx.lineCap = 'round';
+      ['#69C4EF', '#4F9AD6', '#3A78B8'].forEach((col, k) => {
+        ctx.strokeStyle = col;
+        ctx.beginPath(); ctx.moveTo(62, 1262 + k * 18); ctx.lineTo(98, 1232 + k * 18); ctx.stroke();
+      });
+      ctx.restore();
+    });
+
+    // everything below stays inside the white card
+    ctx.save();
+    framePath(ctx, 'white'); ctx.clip();
+
+    // thin inner trace line, skipped at the top centre, with double tick marks
+    ctx.save();
+    ctx.beginPath(); ctx.rect(0, 0, W, H); ctx.rect(330, 0, 540, 140); ctx.clip('evenodd');
+    ctx.strokeStyle = '#6AA6DC'; ctx.lineWidth = 2; framePath(ctx, 'trace'); ctx.stroke();
+    ctx.restore();
+    ctx.strokeStyle = '#4FB6F0'; ctx.lineWidth = 3; ctx.lineCap = 'butt';
+    [[304, 1], [896, -1]].forEach(([x, d]) => {
+      [0, 12].forEach(o => { ctx.beginPath(); ctx.moveTo(x + d * o, 69); ctx.lineTo(x + d * (o + 8), 82); ctx.stroke(); });
+    });
+
+    // corner brackets
+    ctx.strokeStyle = '#0F2A55'; ctx.lineWidth = 5;
+    bracket(ctx, 138, 134, 1, 1, 46); bracket(ctx, W - 138, 134, -1, 1, 46);
+    bracket(ctx, 167, 1138, 1, 1, 40); bracket(ctx, 1033, 1138, -1, 1, 40);
+    bracket(ctx, 167, 1358, 1, -1, 40); bracket(ctx, 1033, 1358, -1, -1, 40);
+    ctx.lineCap = 'round';
+
+    // ----- logo + acronym -----
+    const LX = 160, LY = 158, LH = 190;
+    if (logo) {
+      const w = LH * logo.naturalWidth / logo.naturalHeight;
+      ctx.drawImage(logo, LX, LY, w, LH);
+      arcText(ctx, 'Live, Learn & Prosper', LX + w / 2, LY + LH / 2, 126, 150, { font: MIC, weight: 400, color: '#2B7A8C', maxSize: 21, stroke: 1.1 });
+    }
+    acronymLine(ctx, [['A', 1], ['daptive ', 0], ['L', 1], ['earning, ', 0], ['E', 1], ['ducation,', 0]], 712, 244, 600);
+    acronymLine(ctx, [['and e', 0], ['X', 1], ['perimental ', 0], ['I', 1], ['ntelligence for ', 0], ['S', 1], ['ociety', 0]], 738, 321, 676);
+
+    // ----- portrait with HUD ring -----
+    const cx = 600, cy = 776, R = 296;
+    ctx.save();                                   // faint grid behind the ring, fading at its ends
+    const gx0 = 205, gx1 = 995, gy0 = 552, gy1 = 1090;
+    ctx.beginPath(); ctx.rect(gx0, gy0, gx1 - gx0, gy1 - gy0); ctx.clip();
+    ctx.strokeStyle = 'rgba(105,135,170,0.55)'; ctx.lineWidth = 1.3;
+    for (let gx = gx0; gx <= gx1; gx += 27) { ctx.beginPath(); ctx.moveTo(gx, gy0); ctx.lineTo(gx, gy1); ctx.stroke(); }
+    for (let gy = gy0; gy <= gy1; gy += 27) { ctx.beginPath(); ctx.moveTo(gx0, gy); ctx.lineTo(gx1, gy); ctx.stroke(); }
+    [[gx0, gy0, gx0 + 80, gy0], [gx1, gy0, gx1 - 80, gy0], [cx, gy0, cx, gy0 + 90], [cx, gy1, cx, gy1 - 90]].forEach(([x1, y1, x2, y2]) => {
+      const g = ctx.createLinearGradient(x1, y1, x2, y2);
+      g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = g; ctx.fillRect(gx0, gy0, gx1 - gx0, gy1 - gy0);
+    });
+    ctx.restore();
+
+    const glow = ctx.createRadialGradient(cx, cy, 300, cx, cy, 450);
+    glow.addColorStop(0, 'rgba(90,170,245,0.36)'); glow.addColorStop(1, 'rgba(90,170,245,0)');
+    ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(cx, cy, 450, 0, Math.PI * 2); ctx.fill();
+
+    // portrait or initials
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.clip();
+    if (photoImg) {
+      const s = Math.max(2 * R / photoImg.naturalWidth, 2 * R / photoImg.naturalHeight);
+      const sw = 2 * R / s, sh = 2 * R / s;
+      ctx.drawImage(photoImg, (photoImg.naturalWidth - sw) / 2, (photoImg.naturalHeight - sh) * 0.3, sw, sh, cx - R, cy - R, 2 * R, 2 * R);
+    } else {
+      const bg = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
+      bg.addColorStop(0, '#2D4A73'); bg.addColorStop(1, '#4F7DB5');
+      ctx.fillStyle = bg; ctx.fillRect(cx - R, cy - R, 2 * R, 2 * R);
+      ctx.strokeStyle = 'rgba(190,225,255,0.18)'; ctx.lineWidth = 1;
+      for (let g = -R; g <= R; g += 27) {
+        ctx.beginPath(); ctx.moveTo(cx + g, cy - R); ctx.lineTo(cx + g, cy + R); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx - R, cy + g); ctx.lineTo(cx + R, cy + g); ctx.stroke();
+      }
+      const words = String(m.fullName || '?').trim().split(/\s+/);
+      const first = Array.from(words[0])[0] || '?';
+      const initials = /[㐀-鿿]/.test(first) ? first : (first + (words.length > 1 ? Array.from(words[words.length - 1])[0] : '')).toUpperCase();
+      text(ctx, initials, cx, cy + 62, { font: ORB, weight: 700, size: 190, color: 'rgba(255,255,255,0.92)', align: 'center', maxW: 420, min: 80 });
+    }
+    const shade = ctx.createRadialGradient(cx, cy, R * 0.8, cx, cy, R);
+    shade.addColorStop(0, 'rgba(20,70,140,0)'); shade.addColorStop(1, 'rgba(20,70,140,0.3)');
+    ctx.fillStyle = shade; ctx.fillRect(cx - R, cy - R, 2 * R, 2 * R);
+    ctx.restore();
+
+    // ring layers
+    ctx.lineCap = 'butt';
+    const arc = (r, a, b, w, col) => { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.beginPath(); ctx.arc(cx, cy, r, rad(a), rad(b)); ctx.stroke(); };
+    arc(352, 0, 360, 3, '#78B2E6');                                   // thin outer ring
+    const ringG = ctx.createLinearGradient(cx + 340, cy - 340, cx - 340, cy + 340);
+    ringG.addColorStop(0, '#0A2556'); ringG.addColorStop(.55, '#0F3270'); ringG.addColorStop(1, '#2062B0');
+    arc(318, 0, 360, 36, ringG);                                      // wide navy ring
+    arc(298, 0, 360, 3, '#59C0F2');                                   // thin inner ring at the photo edge
+    ctx.save(); ctx.shadowColor = 'rgba(94,194,245,0.9)'; ctx.shadowBlur = 10;
+    [[220, 268], [-3, 26], [88, 136], [40, 56]].forEach(([a, b]) => arc(332, a, b, 10, '#62C4F6'));
+    ctx.restore();
+    // thin arcs and bright bars inside the photo
+    ctx.save(); ctx.globalAlpha = 0.9;
+    [[196, 246], [-64, -24], [112, 150]].forEach(([a, b]) => arc(272, a, b, 2, '#7FD0F8'));
+    [[164, 196], [-16, 18]].forEach(([a, b]) => arc(282, a, b, 6, '#4DB9F2'));
+    ctx.fillStyle = '#5CC3F4';
+    for (let i = 0; i < 9; i++) ctx.fillRect(cx - 224, cy - 62 + i * 14, 18, 5);
+    for (let i = 0; i < 7; i++) ctx.fillRect(cx + 208, cy - 20 + i * 14, 14, 5);
+    ctx.restore();
+    // markers on the ring
+    ctx.fillStyle = '#7ED3FA';
+    ctx.fillRect(cx - 8, cy - 327 - 8, 16, 16);
+    ctx.fillRect(cx - 327 - 7, cy - 7, 14, 14);
+    ctx.fillRect(cx + Math.cos(rad(137)) * 327 - 7, cy + Math.sin(rad(137)) * 327 - 7, 14, 14);
+    ctx.beginPath(); ctx.arc(cx + Math.cos(rad(-34)) * 327, cy + Math.sin(rad(-34)) * 327, 8, 0, Math.PI * 2); ctx.fill();
+    [rad(146), rad(329)].forEach(a => {                                // two small arrow markers
+      const px = cx + Math.cos(a) * 312, py = cy + Math.sin(a) * 312;
+      ctx.save(); ctx.translate(px, py); ctx.rotate(a + Math.PI / 2);
+      ctx.beginPath(); ctx.moveTo(0, -12); ctx.lineTo(11, 10); ctx.lineTo(-11, 10); ctx.closePath(); ctx.fill();
+      ctx.restore();
+    });
+    ctx.strokeStyle = '#7ED3FA'; ctx.lineWidth = 2.5;
+    [[cx - 296, cx - 270], [cx + 270, cx + 296]].forEach(([a, b]) => { ctx.beginPath(); ctx.moveTo(a, cy + 6); ctx.lineTo(b, cy + 6); ctx.stroke(); });
+    ctx.lineCap = 'round';
+
+    // circuit trace and barcode, top right
+    ctx.strokeStyle = '#4FB6F0'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(851, 533); ctx.lineTo(918, 469); ctx.lineTo(1044, 469); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(906, 498); ctx.lineTo(960, 498); ctx.lineWidth = 4; ctx.stroke();
+    ctx.fillStyle = '#4FB6F0';
+    ctx.beginPath(); ctx.arc(851, 533, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(1047, 469, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#7FA6D0';
+    for (let b = 0; b < 14; b++) ctx.fillRect(980 + b * 5, 478, b % 3 === 0 ? 3 : 2, 22);
+
+    // ----- name and titles -----
+    // A long name goes on two lines (and the titles get smaller) instead of being cut off.
+    const nameMax = 820;
+    ctx.save(); ctx.font = ORB(700, 87);
+    const fullWidth = ctx.measureText(name).width;
+    ctx.restore();
+    const words = name.split(/\s+/);
+    const twoLines = words.length > 1 && fullWidth * (52 / 87) > nameMax;
+    let y1 = 1292, y2 = 1354, titleSize = 52;
+    if (!twoLines) {
+      text(ctx, name, 600, 1220, { font: ORB, weight: 700, size: 87, color: K.ink, align: 'center', maxW: nameMax, min: 38 });
+    } else {
+      ctx.save(); ctx.font = ORB(700, 52);
+      let cut = 1, best = Infinity;
+      for (let i = 1; i < words.length; i++) {          // break where the two lines are most even
+        const w = Math.max(ctx.measureText(words.slice(0, i).join(' ')).width, ctx.measureText(words.slice(i).join(' ')).width);
+        if (w < best) { best = w; cut = i; }
+      }
+      ctx.restore();
+      const nameOpts = { font: ORB, weight: 700, size: 52, color: K.ink, align: 'center', maxW: nameMax, min: 26 };
+      text(ctx, words.slice(0, cut).join(' '), 600, 1186, nameOpts);
+      text(ctx, words.slice(cut).join(' '), 600, 1238, nameOpts);
+      y1 = 1296; y2 = 1342; titleSize = 36;
+    }
+    const titleOpts = { font: ORB, weight: 600, size: titleSize, color: K.ink, align: 'center', maxW: 700, min: 20 };
+    if (title1) text(ctx, title1, 600, y1, titleOpts);
+    if (title2) text(ctx, title2, 600, y2, titleOpts);
+
+    // ----- member since, code, flag -----
+    text(ctx, 'Member Since ' + m.since, 170, 1460, { font: EXO, weight: 700, size: 64, color: K.ink, maxW: 640, min: 30 });
+    text(ctx, 'SEC-CODE: ' + m.secCode, 170, 1537, { font: ORB, weight: 500, size: 34, color: K.ink, maxW: 640, min: 20 });
+    if (flag) {
+      const fw = 176, fh = 132, fx = 1027 - fw, fy = 1400;
+      ctx.drawImage(flag, fx, fy, fw, fh);
+      ctx.strokeStyle = '#C3CCD8'; ctx.lineWidth = 2; ctx.strokeRect(fx, fy, fw, fh);
+    } else if (m.country) {
+      ctx.strokeStyle = K.navy; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(827, 1420, 200, 90, 14) : ctx.rect(827, 1420, 200, 90); ctx.stroke();
+      text(ctx, String(m.country).toUpperCase(), 927, 1476, { font: ORB, weight: 600, size: 26, color: K.ink, align: 'center', maxW: 172, min: 12 });
+    }
+
+    // circuit traces, right edge
+    ctx.strokeStyle = '#4FB6F0'; ctx.lineWidth = 2;
+    const trace = pts => { ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke(); };
+    ctx.beginPath(); ctx.moveTo(1090, 1372); ctx.lineTo(1090, 1572); ctx.stroke();
+    trace([[1056, 1392], [1066, 1392], [1076, 1402], [1076, 1424], [1090, 1438]]);
+    trace([[1056, 1432], [1070, 1432], [1080, 1442], [1098, 1442]]);
+    trace([[1056, 1468], [1070, 1468], [1082, 1480], [1082, 1498], [1098, 1514]]);
+    trace([[1056, 1508], [1066, 1508], [1076, 1518], [1076, 1538], [1090, 1552]]);
+    ctx.fillStyle = '#FFFFFF';
+    [[1090, 1372], [1098, 1442], [1098, 1514], [1090, 1572], [1090, 1438], [1090, 1552]].forEach(([x, y]) => { ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); });
+    // small blue bars, left edge
+    ctx.fillStyle = '#2F68A6';
+    ctx.beginPath(); ctx.moveTo(104, 1452); ctx.lineTo(118, 1366); ctx.lineTo(126, 1366); ctx.lineTo(126, 1452); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#3F7FC0'; ctx.fillRect(134, 1360, 6, 92);
+    for (let i = 0; i < 6; i++) ctx.fillRect(104, 1470 + i * 17, 24, 8);
+
+    // ----- bottom band with the motto -----
+    ctx.fillStyle = '#0A1230'; ctx.fillRect(0, 1588, W, 200);
+    const edge = ctx.createLinearGradient(100, 0, 1100, 0);
+    edge.addColorStop(0, 'rgba(92,184,236,0.2)'); edge.addColorStop(.2, '#5CB8EC'); edge.addColorStop(.8, '#5CB8EC'); edge.addColorStop(1, 'rgba(92,184,236,0.2)');
+    ctx.fillStyle = edge; ctx.fillRect(0, 1586, W, 4);
+    text(ctx, m.motto || '', 600, 1668, { font: EXO, weight: 500, size: 56, color: '#FFFFFF', align: 'center', maxW: 940, min: 24 });
+
+    ctx.restore();
+    return cv;
+  }
+
+  /* ---------- result ---------- */
+  let currentCanvas = null;
+  function renderResultText() {
+    if (!lastResult) return;
+    const { member, returning } = lastResult;
+    $('#resultTitle').textContent = t(returning ? 'r_back' : 'r_welcome', { name: member.fullName });
+    $('#resultSub').textContent = t(returning ? 'r_sub_back' : 'r_sub', { code: member.secCode });
+    const dn = $('#demoNote');
+    dn.hidden = !DEMO;
+    dn.textContent = t('r_demo');
+    $('#cardImg').alt = `Member card for ${member.fullName}, clearance code ${member.secCode}`;
+  }
+  async function showResult(member, returning) {
+    currentCanvas = await drawCard(member);
+    $('#cardImg').src = currentCanvas.toDataURL('image/png');
+    lastResult = { member, returning };
+    renderResultText();
+    $('#viewForm').hidden = true;
+    $('#viewResult').hidden = false;
+    window.scrollTo({ top: 0 });
+    $('#resultTitle').focus();
+  }
+  $('#btnDownload').addEventListener('click', () => {
+    if (!currentCanvas || !lastResult) return;
+    currentCanvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `ALEXIS-${lastResult.member.secCode}.png`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    }, 'image/png');
+  });
+  $('#btnAnother').addEventListener('click', () => {
+    $('#regForm').reset();
+    clearPhoto(); clearFieldErrors(); clearAlert();
+    lastResult = null; currentCanvas = null;
+    resetSelects();
+    $('#viewResult').hidden = true;
+    $('#viewForm').hidden = false;
+    window.scrollTo({ top: 0 });
+    $('#fullName').focus();
+  });
+
+  resetSelects();
+  renderStatus();
+  checkRoster();
+})();
+</script>
+</body>
+</html>
